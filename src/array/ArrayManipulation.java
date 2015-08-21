@@ -1,4 +1,4 @@
-package laprat;
+package array;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package laprat;
+package array;
 
 import static org.junit.Assert.*;
 
@@ -67,11 +67,13 @@ public class ArrayManipulationTest {
 	}
 	
 	@Test
-	public void testDifferentDataType(){
-		String[] stringArray = {"a", "b", "c"};
-		ArrayList<Object> testArray = am.createArray("a", stringArray, 1.2, 500L, false);
+	public void testFlatten4dArray(){
+		ArrayList<Object> thirdLevelArray = am.createArray("a", "b", "c");
+		ArrayList<Object> secondLevelArray = am.createArray(thirdLevelArray, "a", "b", 1, 10L, true);
+		ArrayList<Object> firstLevelArray = am.createArray(4, false, 5L, "d", secondLevelArray);
+		ArrayList<Object> testArray = am.createArray("a", firstLevelArray, 1.2, 500L, false);
 		ArrayList<Object> actual = am.flattenArray(testArray);
-		ArrayList<Object> expected = new ArrayList<Object>(Arrays.asList("a", "a", "b", "c", "b", 1, 10L, true));
-		assertArrayEquals("flatten different datatype failed", expected.toArray(), actual.toArray());
+		ArrayList<Object> expected = new ArrayList<Object>(Arrays.asList("a", 4, false, 5L, "d", "a", "b", "c", "a", "b", 1, 10L, true, 1.2, 500L, false));
+		assertArrayEquals("flatten 4d failed", expected.toArray(), actual.toArray());
 	}
 }
