@@ -44,4 +44,18 @@ public class ArrayManipulation {
 			}
 		}
 	}
+	
+	public static void main(String[] args){
+		ArrayManipulation am = new ArrayManipulation();
+		ArrayList<Object> thirdLevelArray = am.createArray("a", "b", "c");
+		ArrayList<Object> secondLevelArray = am.createArray(thirdLevelArray, "a", "b", 1, 10L, true);
+		ArrayList<Object> firstLevelArray = am.createArray(4, false, 5L, "d", secondLevelArray);
+		ArrayList<Object> testArray = am.createArray("a", firstLevelArray, 1.2, 500L, false);
+		ArrayList<Object> results = am.flattenArray(testArray);
+		if (results != null && !results.isEmpty()){
+			for (Object obj : results){
+				System.out.println(obj.toString());
+			}
+		}
+	}
 }
